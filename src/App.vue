@@ -1,32 +1,50 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+  <div>
+    <p>Seçili Component : {{ componentSelected }}</p>
+    <br />
+    <button
+      class="btn-sm btn btn-primary"
+      @click="componentSelected = 'BlueTheme'"
+    >
+      Blue Theme
+    </button>
+    <button
+      class="btn-sm btn btn-primary"
+      @click="componentSelected = 'RedTheme'"
+    >
+      Red Theme
+    </button>
+    <button
+      class="btn-sm btn btn-primary"
+      @click="componentSelected = 'GreenTheme'"
+    >
+      Green Theme
+    </button>
+    <br /><br />
+    <component :is="componentSelected"></component>
   </div>
 </template>
+<script>
+import BlueTheme from "@/views/BlueTheme.vue";
+import RedTheme from "@/views/RedTheme.vue";
+import GreenTheme from "@/views/GreenTheme.vue";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+export default {
+  components: {
+    BlueTheme,
+    RedTheme,
+    GreenTheme,
+  },
+  data() {
+    return {
+      componentSelected: "BlueTheme",
+    };
+  },
+};
+</script>
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped>
+button {
+  margin-left: 5px;
 }
 </style>
